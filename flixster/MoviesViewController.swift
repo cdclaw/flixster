@@ -37,7 +37,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 
             
                 // TODO: Get the array of movies
-                print(dataDictionary)
+                
                 // TODO: Store the movies in a property to use elsewhere
                 self.movies = dataDictionary["results"] as! [[String:Any]]
                 // TODO: Reload your table view data
@@ -72,20 +72,34 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let posterPath = movie["poster_path"] as! String
         let posterURL = URL(string: baseURL+posterPath) //using function URL() 
         
-        print("url", posterURL)
+        
         cell.posterView.af_setImage(withURL: posterURL!)
         return cell
         
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        // Find the selected movie
+        
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        // Pass the selected movie to the details view controller
+        
+        let detailsViewController = segue.destination as! MovieDetailViewController
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated: true) // to de-select the cell (make the gray disappear!)
     }
-    */
+    
 
 }
