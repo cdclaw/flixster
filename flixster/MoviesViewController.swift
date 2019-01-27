@@ -13,8 +13,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     
-    @IBOutlet weak var tableView: UITableView!
-    var movies = [[String:Any]]()
+    @IBOutlet weak var tableView: UITableView! // after adding a tableView in storyboard, make an outlet to here
+    var movies = [[String:Any]]() //a dictionary used to store data from api
     
 
     override func viewDidLoad() {
@@ -71,7 +71,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let baseURL = "https://image.tmdb.org/t/p/w185"
         let posterPath = movie["poster_path"] as! String
         let posterURL = URL(string: baseURL+posterPath) //using function URL() 
-          
+        
+        print("url", posterURL)
         cell.posterView.af_setImage(withURL: posterURL!)
         return cell
         
